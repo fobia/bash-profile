@@ -1,0 +1,30 @@
+[user]
+	name = develop
+	email = dev@localhost
+
+[color]
+    diff = auto
+    status = auto
+    branch = auto
+    interactive = true
+	sh = auto
+
+[color "sh"]
+	branch = yellow reverse
+	workdir = blue bold
+	dirty = red
+
+[core]
+	autocrlf = false
+	safecrlf = false
+	editor = nano
+	quotepath = false
+
+[gui]
+	fontdiff = -family \"Courier New\" -size 10 -weight normal -slant roman -underline 0 -overstrike 0
+
+[alias]
+	s = status
+	ss = status -s
+
+
