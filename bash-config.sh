@@ -14,9 +14,16 @@ echo "# ${HOME}/.bash_config"
 #export LANG=$(locale -uU)
 
 # Подсветка директорий
-if [ -f "/etc/DIR_COLORS" ]; then
-  eval "$(dircolors -b /etc/DIR_COLORS)"
+DIR_COLORS=
+listFiles="/etc/DIR_COLORS /etc/dircolors ~/.dircolors"
+for f in listFiles; do
+  [[ -f "$f" ]] && DIR_COLORS="$f"
+done
+if [[ "$DIR_COLORS" != "" ]]; then
+  eval "$(dircolors -b $DIR_COLORS)"
 fi
+unset f DIR_COLORS
+
 
 # Основная строка приглашения
 #   user@host:server and current_directory
