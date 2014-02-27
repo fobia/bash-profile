@@ -57,6 +57,9 @@ pear channel-discover pear.phpmd.org
 pear channel-discover pear.pdepend.org
 pear install --alldeps phpmd/PHP_PMD
 
+pear channel-discover pear.phing.info
+pear install phing/phing
+
 echo "PHAR..."
 
 # conposer
@@ -93,5 +96,10 @@ mv phpcpd.phar /usr/local/bin/phpcpd
 wget http://phpdox.de/releases/phpdox.phar
 chmod +x phpdox.phar
 mv phpdox.phar /usr/local/bin/phpdox
+
+# phing
+# wget http://www.phing.info/get/phing-latest.phar
+# chmod +x phing-latest.phar
+# mv phing-latest.phar /usr/local/bin/phing
 
 
