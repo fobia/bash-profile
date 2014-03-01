@@ -1,6 +1,6 @@
 [user]
-	name = develop
-	email = dev@localhost
+	name = developer
+	email = info@ufac.ru
 
 [color]
     diff = auto
@@ -9,22 +9,31 @@
     interactive = true
 	sh = auto
 
-[color "sh"]
-	branch = yellow reverse
-	workdir = blue bold
-	dirty = red
-
 [core]
 	autocrlf = false
 	safecrlf = false
 	editor = nano
 	quotepath = false
 
-[gui]
-	fontdiff = -family \"Courier New\" -size 10 -weight normal -slant roman -underline 0 -overstrike 0
+;[gui]
+;	fontdiff = -family \"Courier New\" -size 10 -weight normal -slant roman -underline 0 -overstrike 0
 
 [alias]
 	s = status
 	ss = status -s
+	lg = log --color --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr)%C(bold blue)<%an>%Creset' --abbrev-commit
 
+[color "sh"]
+	branch = yellow reverse
+	workdir = blue bold
+	dirty = red
 
+[giggle]
+	main-window-maximized = false
+	main-window-geometry = 882x546+0+0
+	main-window-view = FileView
+	history-view-vpane-position = 284
+	file-view-vpane-position = 444
+
+[credential]
+	helper = cache
