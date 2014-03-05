@@ -15,7 +15,7 @@ echo "# ${HOME}/.bash_config"
 
 # Подсветка директорий
 DIR_COLORS=
-listFiles="/etc/DIR_COLORS /etc/dircolors ~/.dircolors"
+listFiles="/etc/DIR_COLORS /etc/dircolors ~/.config/bash/dircolors ~/.dircolors"
 for f in listFiles; do
   [[ -f "$f" ]] && DIR_COLORS="$f"
 done
