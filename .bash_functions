@@ -3,80 +3,17 @@
 [ -z "$PS1" ] && return
 [[ "$-" != *i* ]] && return
 
-echo ">>> $0"
+echo ">>> ${BASH_SOURCE[0]}"
 
-
-##
-## Colors
-##
-
-# Локали (cygwin)
-#export LANG=$(locale -uU)
-
-# Подсветка директорий
-DIR_COLORS=
-listFiles="/etc/DIR_COLORS /etc/dircolors ~/.local/bash/dircolors ~/.dircolors"
-for f in listFiles; do
-  [[ -f "$f" ]] && DIR_COLORS="$f"
-done
-if [[ "$DIR_COLORS" != "" ]]; then
-  eval "$(dircolors -b $DIR_COLORS)"
+BF_HOME=$( cd $( dirname "${BASH_SOURCE[0]}" ) && pwd )
+if [  "$BF_HOME" = "$HOME" ]; then
+  BF_HOME="$HOME/.local/bash-profile"
 fi
-unset f DIR_COLORS
-
-
-# Основная строка приглашения
-#   user@host:server and current_directory
-# PS1='\[\e]0;\w\a\]\n\[\e[32m\]server \u@\h \[\e[33m\]\w\[\e[0m\]\n\$ '
-# 
-# С переводом на новую строчку
-# PS1='\[\e]0;\w\a\]\n\[\e[32m\]\u@\h \[\e[33m\]\w\[\e[0m\]\n\$ '
-
-# Без перевода на новую строчку
-#PS1='\[\e]0;\w\a\]\n\[\e[32m\]\u@\h \[\e[33m\]\w\[\e[0m\]\$ '
-s1='\[\e]0;\w\a\]\n'
-s2='\[\e[07;91m\]\u'
-s3='\[\e[00;91m\]@\h:'
-s4='\[\e[0m\]\w\$ '
-PS1="$s1$s2$s3$s4"
-unset s1 s2 s3 s4
-
-
-# Эффективно для рута, подсвечивает красным супераользователя
-# PS1='\[\e]0;\u@\h: \w\a\]${debian_chroot:+($debian_chroot)}\[\e[31;01m\]\u\[\e[0m\]@\h:\w\$ '
-# 
-# Для самого рута
-# PS1="\[\e[31m\]\u\[\e[0m\]@\h: \w\a# "
-# 
-# Рут вошел через пользователя 
-if [ "$(whoami)" = "root" ]; then
-    echo "Welcome ROOT !"
-    PS1='\[\e]0;\w\a\]\n\[\e[31;01m\]\u\[\e[0m\]\[\e[32m\]@\h \[\e[33m\]\w\[\e[0m\]\n\[\e[31;01m\]\$\[\e[0m\] '
-fi
-# -----------------------------------------------------------------------------
-
-
-##
-## bash_completion
-##
-
-# Uncomment to turn on programmable completion enhancements.
-# Any completions you add in ~/.bash_completion are sourced last.
-[[ -f ~/.bash_completion ]] && . ~/.bash_completion
-
-# [[ -f "/etc/bash_completion.d/git" ]] &&  . "/etc/bash_completion.d/git"
-
- 
-if [ -d ~/.local/bin ]; then 
-  PATH="~/.local/bin:$PATH"
-fi
-
 
 
 ##
 ## Shell Options
 ##
-
 set meta-flag on
 set convert-meta off
 set input-meta on
@@ -87,26 +24,22 @@ set output-meta on
 # shopt -s histappend
 
 
+[[ -f "$BF_HOME/etc/read_ini.sh" ]]   &&  . "$BF_HOME/etc/read_ini.sh"
+[[ -f "$BF_HOME/etc/fobia-path.sh" ]] &&  . "$BF_HOME/etc/fobia-path.sh"
+[[ -f "$BF_HOME/etc/completion.sh" ]] &&  . "$BF_HOME/etc/completion.sh"
+[[ -f "$BF_HOME/etc/history.sh" ]]    &&  . "$BF_HOME/etc/history.sh"
+[[ -f "$BF_HOME/etc/colors.sh" ]]     &&  . "$BF_HOME/etc/colors.sh"
+
+
+[[ -d "$HOME/.local/bin" ]] && PATH=`_fobia_path "$HOME/.local/bin"`
+[[ -d "$HOME/bin" ]]        && PATH=`_fobia_path "$HOME/bin"`
+
+export PATH
 export EDITOR=vim
-
-# Completion options
-#
-# These completion tuning parameters change the default behavior of bash_completion:
-#
-# Define to access remotely checked-out files over passwordless ssh for CVS
-# COMP_CVS_REMOTE=1
-#
-# Define to avoid stripping description in --option=description of './configure --help'
-# COMP_CONFIGURE_HINTS=1
-#
-# Define to avoid flattening internal contents of tar files
-# COMP_TAR_INTERNAL_PATHS=1
-
-# History Options
-export HISTCONTROL=$HISTCONTROL${HISTCONTROL+,}ignoredups
-export HISTIGNORE=$'[ \t]*:&:[fb]g:exit:ls:dir:www *:history*' # Ignore the ls command as well
-export PROMPT_COMMAND="history -a"
-
+# Локали 
+if [ -z $(locale -a | grep -i ru_RU.utf8) ]; then
+  export LANG=ru_RU.utf8
+fi
 # -----------------------------------------------------------------------------
 
 
