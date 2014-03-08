@@ -22,7 +22,8 @@
 # Any completions you add in ~/.bash_completion are sourced last.
 [[ -f ~/.bash_completion ]] && . ~/.bash_completion
 
-# [[ -f "/etc/bash_completion.d/git" ]] &&  . "/etc/bash_completion.d/git"
+[[ -f "/etc/bash_completion.d/git" ]] &&  . "/etc/bash_completion.d/git"
+[[ -f "/etc/bash_completion.d/yandex-disk-completion.bash" ]] &&  . "/etc/bash_completion.d/yandex-disk-completion.bash"
 
  
 if [ -d ~/.local/bin ]; then 

@@ -30,7 +30,6 @@ set output-meta on
 [[ -f "$BF_HOME/etc/history.sh" ]]    &&  . "$BF_HOME/etc/history.sh"
 [[ -f "$BF_HOME/etc/colors.sh" ]]     &&  . "$BF_HOME/etc/colors.sh"
 
-
 [[ -d "$HOME/.local/bin" ]] && PATH=`_fobia_path "$HOME/.local/bin"`
 [[ -d "$HOME/bin" ]]        && PATH=`_fobia_path "$HOME/bin"`
 
