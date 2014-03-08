@@ -3,7 +3,7 @@
 [ -z "$PS1" ] && return
 [[ "$-" != *i* ]] && return
 
-echo "# $0"
+echo ">>> $0"
 
 
 ##
