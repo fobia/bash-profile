@@ -2,7 +2,7 @@
 
 set -e 
 
-SRC_HOME=$(pwd)/$(dirname $0)
+SRC_HOME=$(pwd)/$(dirname $0)/..
 USER_HOME="$HOME"
 
 for arg in "$@"; do
@@ -24,4 +24,4 @@ cp -i "$SRC_HOME/.gitconfig" "$USER_HOME/"
 cp -i "$SRC_HOME/.gitignore" "$USER_HOME/"
 cp -i "$SRC_HOME/.vimrc"     "$USER_HOME/"
 
-cp -i  "$SRC_HOME/src/dircolors" "$USER_HOME/.config/bash/" 
+cp -i  "$SRC_HOME/etc/dircolors" "$USER_HOME/.config/bash/" 

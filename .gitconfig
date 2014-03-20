@@ -1,6 +1,6 @@
 [user]
-    name = developer
-    email = info@ufac.ru
+    ; name = username
+    ; email = mail@username
     editor = vim
 
 [github]
@@ -56,7 +56,7 @@
     log = log --stat
     lol = log --graph --decorate --pretty=oneline --abbrev-commit
     lola = log --graph --decorate --pretty=oneline --abbrev-commit --all
-    hist = log --pretty=format:\"%h %ad | %s%d [%an]\" --graph --date=short
+    hist = log --pretty=format:'%h %ad | %s%d [%an]' --graph --date=short
 
 
 [giggle]
