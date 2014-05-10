@@ -15,6 +15,49 @@
 
 function read_ini()
 {
+	function help_long()
+	{
+		cat <<
+This is a comfortable and simple INI file parser to be used in
+bash scripts.
+
+USAGE:
+read_ini INI_FILE [SECTION] [[--prefix|-p] PREFIX] [[--booleans|b] [0|1]]
+
+
+OPTIONS:
+
+	--prefix | -p 		PREFIX String to prepend to generated variable names (automatically followed by '__'). Default: INI
+	--booleans | -b] [0|1]	Whether to interpret special unquoted string values 'yes', 'no', 'true', 'false', 'on', 'off' as booleans. Default: 1
+
+
+INI FILE FORMAT:
+	
+	var1="VAR 1"
+	var2 = VAR 2
+
+	[section1]
+	var1="section1 VAR 1"
+	var2= section1 VAR 2
+
+
+EXAMPLE:
+
+	read_ini test1.ini
+
+	echo "var1 = \${INI__var1}"
+	echo "var2 = \${INI__var2}"
+	echo "section1 var1 = \${INI__section1__var1}"
+	echo "section1 var2 = \${INI__section1__var2}"
+	
+	echo "list of all ini vars: \${INI__ALL_VARS}"
+	echo "number of sections: \${INI__NUMSECTIONS}"
+	
+EOF
+
+		return 
+	}
+	
 	# Be strict with the prefix, since it's going to be run through eval
 	function check_prefix()
 	{
@@ -80,7 +123,11 @@ function read_ini()
 	do
 
 		case $1 in
-
+			--help | -h )
+				help_long
+				return
+			;;
+			
 			--clean | -c )
 				CLEAN_ENV=1
 			;;
