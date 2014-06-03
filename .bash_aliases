@@ -3,14 +3,6 @@
 [ -z "$PS1" ] && return
 [[ "$-" != *i* ]] && return
 
-echo ">>> ${BASH_SOURCE[0]}"
-
-BF_HOME=$( cd $( dirname "${BASH_SOURCE[0]}" ) && pwd )
-if [  "$BF_HOME" = "$HOME" ]; then
-  BF_HOME="$HOME/.local/bash-profile"
-fi
-
-
 ##
 ## Shell Options
 ##
@@ -23,17 +15,6 @@ set output-meta on
 # Make bash append rather than overwrite the history on disk
 # shopt -s histappend
 
-
-[[ -f "$BF_HOME/etc/read_ini.sh" ]]   &&  . "$BF_HOME/etc/read_ini.sh"
-[[ -f "$BF_HOME/etc/fobia-path.sh" ]] &&  . "$BF_HOME/etc/fobia-path.sh"
-[[ -f "$BF_HOME/etc/completion.sh" ]] &&  . "$BF_HOME/etc/completion.sh"
-[[ -f "$BF_HOME/etc/history.sh" ]]    &&  . "$BF_HOME/etc/history.sh"
-[[ -f "$BF_HOME/etc/colors.sh" ]]     &&  . "$BF_HOME/etc/colors.sh"
-
-[[ -d "$HOME/.local/bin" ]] && PATH=`_fobia_path "$HOME/.local/bin"`
-[[ -d "$HOME/bin" ]]        && PATH=`_fobia_path "$HOME/bin"`
-
-export PATH
 export EDITOR=vim
 # Локали 
 if [ -z $(locale -a | grep -i ru_RU.utf8) ]; then
@@ -41,6 +22,11 @@ if [ -z $(locale -a | grep -i ru_RU.utf8) ]; then
 fi
 # -----------------------------------------------------------------------------
 
+
+# History Options
+export HISTCONTROL=$HISTCONTROL${HISTCONTROL+,}ignoredups
+export HISTIGNORE=$'[ \t]*:&:[fb]g:exit:ls:dir:www *:history*' # Ignore the ls command as well
+export PROMPT_COMMAND="history -a"
 
 ##
 ## Aliases
@@ -160,3 +146,37 @@ _pear_cd_dir ()
     return 0
 }
 alias pear=_pear_cd_dir
+
+
+
+
+# Основная строка приглашения
+#   user@host:server and current_directory
+# PS1='\[\e]0;\w\a\]\n\[\e[32m\]server \u@\h \[\e[33m\]\w\[\e[0m\]\n\$ '
+# 
+# С переводом на новую строчку
+# PS1='\[\e]0;\w\a\]\n\[\e[32m\]\u@\h \[\e[33m\]\w\[\e[0m\]\n\$ '
+
+# Без перевода на новую строчку
+#PS1='\[\e]0;\w\a\]\n\[\e[32m\]\u@\h \[\e[33m\]\w\[\e[0m\]\$ '
+sN='\[\e]0;\w\a\]'
+sU='\[\e[07;91m\]\u'
+sH='\[\e[00;91m\]@\h:'
+sW='\[\e[0m\]\w'
+PS1="$sN$sU$sH$sW"'\$ '
+unset sN sU sH sW
+
+
+# Эффективно для рута, подсвечивает красным супераользователя
+# PS1='\[\e]0;\u@\h: \w\a\]${debian_chroot:+($debian_chroot)}\[\e[31;01m\]\u\[\e[0m\]@\h:\w\$ '
+# 
+# Для самого рута
+# PS1="\[\e[31m\]\u\[\e[0m\]@\h: \w\a# "
+# [\[\e[01;31m\]\u\[\e[0m\]@\h \W]\[\e[01;31m\]\$\[\e[0m\]
+# 
+# Рут вошел через пользователя 
+if [ "$(whoami)" = "root" ]; then
+    echo "Welcome ROOT !"
+    PS1='\[\e]0;\w\a\]\n\[\e[31;01m\]\u\[\e[0m\]\[\e[32m\]@\h \[\e[33m\]\w\[\e[0m\]\n\[\e[31;01m\]\$\[\e[0m\] '
+fi
+# -----------------------------------------------------------------------------
