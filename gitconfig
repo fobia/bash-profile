@@ -1,0 +1,70 @@
+[user]
+    ; name = username
+    ; email = mail@username
+    editor = vim
+
+[github]
+    user = user
+
+[color]
+    diff = auto
+    status = auto
+    branch = auto
+    interactive = true
+    sh = auto
+
+[color "branch"]
+    current = yellow reverse
+    local = yellow
+    remote = green
+
+[color "diff"]
+    meta = yellow
+    frag = magenta
+    old = red
+    new = green
+
+[color "status"]
+    added = yellow
+    changed = green
+    untracked = cyan
+
+[color "sh"]
+    branch = yellow reverse
+    workdir = blue bold
+    dirty = red
+
+[core]
+    ; autocrlf = false
+    ; safecrlf = false
+    ; editor = nano
+    quotepath = false
+    excludesfile = ~/.gitignore
+
+;[gui]
+;	fontdiff = -family \"Courier New\" -size 10 -weight normal -slant roman -underline 0 -overstrike 0
+
+[alias]
+    c = commit
+    ; s = status -sb
+    s = status
+    ss = status -s
+    st = status
+    co = checkout
+    ; lg = log -p
+    lg = log --color --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr)%C(bold blue)<%an>%Creset' --abbrev-commit
+    log = log --stat
+    lol = log --graph --decorate --pretty=oneline --abbrev-commit
+    lola = log --graph --decorate --pretty=oneline --abbrev-commit --all
+    hist = log --pretty=format:'%h %ad | %s%d [%an]' --graph --date=short
+
+
+[giggle]
+    main-window-maximized = false
+    main-window-geometry = 882x546+0+0
+    main-window-view = FileView
+    history-view-vpane-position = 284
+    file-view-vpane-position = 444
+
+[credential]
+    helper = cache
