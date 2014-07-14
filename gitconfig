@@ -1,7 +1,6 @@
 [user]
-    ; name = username
-    ; email = mail@username
-    editor = vim
+    name = Dmitriy Tyurin
+    email = fobia3d@gmail.com
 
 [github]
     user = user
@@ -13,42 +12,25 @@
     interactive = true
     sh = auto
 
-[color "branch"]
-    current = yellow reverse
-    local = yellow
-    remote = green
-
-[color "diff"]
-    meta = yellow
-    frag = magenta
-    old = red
-    new = green
-
-[color "status"]
-    added = yellow
-    changed = green
-    untracked = cyan
-
 [color "sh"]
     branch = yellow reverse
     workdir = blue bold
     dirty = red
 
 [core]
-    ; autocrlf = false
+    autocrlf = input
     ; safecrlf = false
-    ; editor = nano
+    editor = vim
     quotepath = false
     excludesfile = ~/.gitignore
 
-;[gui]
-;	fontdiff = -family \"Courier New\" -size 10 -weight normal -slant roman -underline 0 -overstrike 0
+[gui]
+	fontdiff = -family \"Courier New\" -size 10 -weight normal -slant roman -underline 0 -overstrike 0
 
 [alias]
     c = commit
-    ; s = status -sb
     s = status
-    ss = status -s
+    ss = status -sb
     st = status
     co = checkout
     ; lg = log -p
@@ -57,7 +39,6 @@
     lol = log --graph --decorate --pretty=oneline --abbrev-commit
     lola = log --graph --decorate --pretty=oneline --abbrev-commit --all
     hist = log --pretty=format:'%h %ad | %s%d [%an]' --graph --date=short
-
 
 [giggle]
     main-window-maximized = false
